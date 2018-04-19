@@ -12,7 +12,7 @@
 #------------------------------------------------------
 # VARIABLES GLOBALES
 #------------------------------------------------------
-proyectoActual="/home/andrew/Documents/repo_GitLab/2013_SoftwareEnginneringAndComplexity_BestPaperAward";
+proyectoActual="/home/marcos/Escritorio/tp";
 proyectos="/home/andrew/Documents/repo_GitLab/repos.txt";
 
 #------------------------------------------------------
@@ -28,8 +28,8 @@ imprimir_menu () {
     echo -e "\t\t Opciones:";
     echo "";
     echo -e "\t\t\t a.  Ver estado del proyecto";
-    echo -e "\t\t\t b.  ";
-    echo -e "\t\t\t c.  ";
+    echo -e "\t\t\t b.  Buscar programa ";
+    echo -e "\t\t\t c.  Buscar archivos";
     echo -e "\t\t\t d.  ";        
     echo -e "\t\t\t e.  ";        
     echo -e "\t\t\t q.  Salir";
@@ -88,17 +88,42 @@ a_funcion () {
 
 b_funcion () {
            imprimir_encabezado "\tOpción b";
-    #completar
+           echo "Ingrese programa a buscar"
+            read paquete
+            if dpkg -l | grep -w $paquete; then
+                echo "el programa esta"
+            else
+                echo "no esta"
+            fi
 }
 
 c_funcion () {
           imprimir_encabezado "\tOpción c";
-          #completar       
+            echo "ingrese path"
+            read path
+            echo "ingresar extencion"
+            read extencion 
+            echo "ingrese nombre"
+            read nombre
+
+            if  find $path -name "*.$extencion" | grep -i $nombre > archivos.txt; then
+                cat archivos.txt
+            else
+                echo "no se encontro el archivo con la busqueda deseada"
+            fi
+
+find /$path -name "*.$extencion" | grep -i $nombre       
 }
 
 d_funcion () {
     imprimir_encabezado "\tOpción d";
-    #completar
+        echo "ingrese la ubicacion del archivo"
+        read path
+        echo "ingresar string"
+        read palabra 
+        cat $path | grep -n $palabra >> salida.out 
+        echo "-------" >> salida.out
+        cat salida.out
 }
 
 
